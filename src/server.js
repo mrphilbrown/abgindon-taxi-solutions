@@ -1,6 +1,6 @@
 import { createServer as createHttpServer } from "node:http";
 import { pathToFileURL } from "node:url";
-import { driverRecord, managerOverview } from "./data.js";
+import { driverRecord, managerOverview, ownerOverview } from "./data.js";
 
 export function createServer() {
   return createHttpServer((request, response) => {
@@ -10,7 +10,7 @@ export function createServer() {
     let status = 200;
 
     if (url.pathname === "/") {
-      body = { name: "Abgindon Taxi Solution Co.", notice: "Synthetic workshop data only" };
+      body = { name: "Abgindon Taxi Solutions", notice: "Synthetic workshop data only" };
     } else if (parts.length === 3 && parts[0] === "drivers" &&
                (parts[2] === "contract" || parts[2] === "earnings")) {
       const driver = driverRecord(parts[1]);
@@ -24,6 +24,8 @@ export function createServer() {
       }
     } else if (url.pathname === "/managers/overview") {
       body = managerOverview();
+    } else if (url.pathname === "/owners/overview") {
+      body = ownerOverview();
     } else {
       status = 404;
       body = { error: "Not found" };

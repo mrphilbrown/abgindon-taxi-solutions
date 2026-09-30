@@ -19,9 +19,9 @@ test("driver can read synthetic contract and earnings", async () => {
   assert.equal(earnings.earningsGbp, 672);
 });
 
-test("portal identifies our fictional company", async () => {
+test("portal identifies our taxi company", async () => {
   const home = await (await fetch(base)).json();
-  assert.equal(home.name, "Abgindon Taxi Solution Co.");
+  assert.equal(home.name, "Abgindon Taxi Solutions");
 });
 
 test("manager sees aggregates rather than driver records", async () => {
@@ -29,6 +29,14 @@ test("manager sees aggregates rather than driver records", async () => {
     driverCount: 2,
     completedTrips: 80,
     absenceDays: 1
+  });
+});
+
+test("owner sees fleet totals rather than driver records", async () => {
+  assert.deepEqual(await (await fetch(`${base}/owners/overview`)).json(), {
+    driverCount: 2,
+    completedTrips: 80,
+    driverEarningsGbp: 1318
   });
 });
 

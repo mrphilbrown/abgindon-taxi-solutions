@@ -27,3 +27,12 @@ export function managerOverview() {
     absenceDays: records.reduce((sum, driver) => sum + driver.absenceDays, 0)
   };
 }
+
+export function ownerOverview() {
+  const records = Object.values(drivers);
+  return {
+    driverCount: records.length,
+    completedTrips: records.reduce((sum, driver) => sum + driver.completedTrips, 0),
+    driverEarningsGbp: records.reduce((sum, driver) => sum + driver.earningsGbp, 0)
+  };
+}
