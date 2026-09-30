@@ -23,3 +23,11 @@ for the starter. This is a teaching fixture, **not** an HR product: route IDs
 are not authentication, and the sample has no authorization, audit trail,
 production data, or employment-decision automation. Never deploy it or use
 real employee records. Managers see only aggregate synthetic figures.
+
+The fictional buyer's [RFI request](rfi/request.csv) is also included.
+After following the workshop and obtaining a **stamped, passing approval**,
+run `trustbom export` and then `npm run rfi` to map its questions automatically
+to cited answers in `export/answers.csv`. Before approval, `npm run rfi`
+**must refuse** rather than answer from a draft. Answers labelled `unknown`
+and any `export/unmatched.csv` questions need Trust review; the demo does
+not email or send responses to a buyer.

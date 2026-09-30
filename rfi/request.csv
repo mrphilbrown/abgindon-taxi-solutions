@@ -1,0 +1,6 @@
+id,text,section
+RFI-01,Do you use AI?,AI usage
+RFI-02,Which models and vendors are used?,Providers
+RFI-03,Is customer data used to train?,Data governance
+RFI-04,Where does inference run?,Data governance
+RFI-05,Is human oversight required?,Employment
