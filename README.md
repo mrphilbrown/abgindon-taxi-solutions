@@ -1,15 +1,16 @@
-# Abingdon Wagon Taxi Solutions Corp
+# Abgindon Taxi Solution Co.
 
-A **fictional**, local-only driver portal for the
-[AI TrustBOM taxi workshop](https://github.com/mrphilbrown/Spaverlock.AI.TrustBOM/blob/main/documentation/guides/tutorial.md).
-All names, contracts, earnings, and absence records are synthetic. This starter
-has **no AI dependency, MCP server, or live employee data**: that is intentional.
-Follow the workshop to introduce each capability and inspect the resulting
-draft AI bill of materials.
+We are **Abgindon Taxi Solution Co.**, a fictional company like Contoso.
+Our drivers check contracts and earnings here, and our managers see an
+aggregate trips-and-absence dashboard. You are joining our platform team.
+Follow [our AI TrustBOM story](https://github.com/mrphilbrown/Spaverlock.AI.TrustBOM/blob/main/documentation/guides/tutorial.md)
+to add Gemini questions, an MCP earnings tool, and an evidence-backed
+response to a buyer's RFI. We have **no AI dependency or MCP server yet**;
+that is where the story starts.
 
 ```powershell
-git clone https://github.com/mrphilbrown/abingdon-wagon-taxi-demo.git
-cd abingdon-wagon-taxi-demo
+git clone https://github.com/mrphilbrown/abgindon-taxi-solution-co.git
+cd abgindon-taxi-solution-co
 npm test
 npm start
 ```
@@ -18,16 +19,14 @@ Open `http://localhost:3000/`, `/drivers/driver-101/contract`,
 `/drivers/driver-101/earnings`, and `/managers/overview`. Stop the server
 with Ctrl+C before moving to the workshop steps.
 
-Node.js 20+ is required; there is no installation step or external service
-for the starter. This is a teaching fixture, **not** an HR product: route IDs
-are not authentication, and the sample has no authorization, audit trail,
-production data, or employment-decision automation. Never deploy it or use
-real employee records. Managers see only aggregate synthetic figures.
+Node.js 20+ is required; our starter has no external dependencies.
+All names and records are synthetic. This is a teaching fixture, **not** an
+HR product: URL IDs are not authentication; there is no authorization,
+audit trail, production data, or automated employment decision. Never
+deploy it or use real employee records.
 
-The fictional buyer's [RFI request](rfi/request.csv) is also included.
-After following the workshop and obtaining a **stamped, passing approval**,
-run `trustbom export` and then `npm run rfi` to map its questions automatically
-to cited answers in `export/answers.csv`. Before approval, `npm run rfi`
-**must refuse** rather than answer from a draft. Answers labelled `unknown`
-and any `export/unmatched.csv` questions need Trust review; the demo does
-not email or send responses to a buyer.
+A fictional buyer's [RFI request](rfi/request.csv) is included. Our
+`npm run rfi` refuses an unapproved graph; once Trust has approved and
+stamped a graph, `trustbom export` followed by `npm run rfi` creates
+cited answers in `export/answers.csv`. Unknown answers and unmatched
+questions still need our Trust team; nothing is emailed to the buyer.

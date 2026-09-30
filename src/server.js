@@ -10,7 +10,7 @@ export function createServer() {
     let status = 200;
 
     if (url.pathname === "/") {
-      body = { name: "Abingdon Wagon Taxi Solutions Corp", notice: "Synthetic workshop data only" };
+      body = { name: "Abgindon Taxi Solution Co.", notice: "Synthetic workshop data only" };
     } else if (parts.length === 3 && parts[0] === "drivers" &&
                (parts[2] === "contract" || parts[2] === "earnings")) {
       const driver = driverRecord(parts[1]);

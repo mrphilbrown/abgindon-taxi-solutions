@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
-test("fictional buyer RFI has unique IDs and bank-mappable questions", () => {
+test("our buyer RFI has unique IDs and bank-mappable questions", () => {
   const rows = readFileSync(new URL("../rfi/request.csv", import.meta.url), "utf8")
     .trim().split(/\r?\n/);
   assert.equal(rows.shift(), "id,text,section");

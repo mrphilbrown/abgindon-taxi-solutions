@@ -19,6 +19,11 @@ test("driver can read synthetic contract and earnings", async () => {
   assert.equal(earnings.earningsGbp, 672);
 });
 
+test("portal identifies our fictional company", async () => {
+  const home = await (await fetch(base)).json();
+  assert.equal(home.name, "Abgindon Taxi Solution Co.");
+});
+
 test("manager sees aggregates rather than driver records", async () => {
   assert.deepEqual(await (await fetch(`${base}/managers/overview`)).json(), {
     driverCount: 2,
