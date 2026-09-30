@@ -1,0 +1,29 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { driverRecord } from "./data.js";
+
+const [driverId, ...words] = process.argv.slice(2);
+const question = words.join(" ").trim();
+if (!driverId || !question) {
+  console.error('Usage: node src/ask-driver.mjs driver-101 "What have I earned?"');
+  process.exitCode = 1;
+} else if (!process.env.GEMINI_API_KEY) {
+  console.error("Set GEMINI_API_KEY in your environment; do not commit it.");
+  process.exitCode = 1;
+} else {
+  const driver = driverRecord(driverId);
+  if (!driver) {
+    console.error("Unknown synthetic driver");
+    process.exitCode = 1;
+  } else {
+    const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    // The model identifier is tracked config so the scan can cite it.
+    const model = client.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent(
+      `Answer only from this synthetic record. If the answer is absent, say you do not know.
+Contract: ${driver.contract}
+Current earnings GBP: ${driver.earningsGbp}
+Driver question: ${question}`
+    );
+    console.log(result.response.text());
+  }
+}

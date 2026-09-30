@@ -1,0 +1,7 @@
+node_modules/
+.env
+trust/card.json
+trust/card.md
+trust/questionnaire.yml
+trust/findings.sarif
+export/

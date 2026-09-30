@@ -1,0 +1,56 @@
+import readline from "node:readline";
+import { driverRecord } from "./data.js";
+
+const tools = [
+  {
+    name: "get_driver_earnings",
+    description: "Read current earnings for a synthetic driver; demo only, no authentication.",
+    inputSchema: {
+      type: "object",
+      properties: { driverId: { type: "string" } },
+      required: ["driverId"],
+      additionalProperties: false
+    }
+  }
+];
+
+const input = readline.createInterface({ input: process.stdin });
+input.on("line", (line) => {
+  let message;
+  try {
+    message = JSON.parse(line);
+  } catch {
+    process.stdout.write(`${JSON.stringify({ jsonrpc: "2.0", error: {
+      code: -32700, message: "Parse error"
+    }, id: null })}\n`);
+    return;
+  }
+  if (!message || typeof message !== "object" || !Object.hasOwn(message, "id")) {
+    return;
+  }
+  let result;
+  if (message.method === "initialize") {
+    result = {
+      protocolVersion: "2025-03-26",
+      capabilities: { tools: {} },
+      serverInfo: { name: "abingdon-synthetic-earnings", version: "0.1.0" }
+    };
+  } else if (message.method === "tools/list") {
+    result = { tools };
+  } else if (message.method === "tools/call" &&
+             message.params?.name === "get_driver_earnings") {
+    const id = message.params.arguments?.driverId;
+    const driver = typeof id === "string" ? driverRecord(id) : null;
+    result = driver
+      ? { content: [{ type: "text", text: JSON.stringify({
+        driverId: id, earningsGbp: driver.earningsGbp
+      }) }] }
+      : { content: [{ type: "text", text: "Unknown synthetic driver" }], isError: true };
+  }
+  const response = result
+    ? { jsonrpc: "2.0", id: message.id, result }
+    : { jsonrpc: "2.0", id: message.id, error: {
+      code: -32601, message: "Unknown method or tool"
+    } };
+  process.stdout.write(`${JSON.stringify(response)}\n`);
+});
