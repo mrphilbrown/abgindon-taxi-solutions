@@ -1,35 +1,33 @@
 # Abgindon Taxi Solutions
 
 For this tutorial, **we are Abgindon Taxi Solutions**, an AI-first taxi
-services company. We help our customers improve the experience of their
-drivers, managers, and owners. Drivers check contracts and earnings,
-managers see trips and absence, and owners see fleet totals. Our customers
-need to know how we use AI to provide these services.
+services company. Our customers want better driver, manager, and owner
+experiences, and they want to know how we use AI to provide them.
 
-Join our platform team in the [AI TrustBOM tutorial](https://github.com/mrphilbrown/Spaverlock.AI.TrustBOM/blob/main/documentation/guides/tutorial.md):
-introduce Gemini questions and an MCP earnings tool, then generate a
-cited response to a customer RFI. This starter represents an early
-commit, **before** those AI integrations are added.
+This is a **Git evidence repository**, not a runnable taxi application.
+Read [our service description](service/experience.md), then follow the
+[AI TrustBOM tutorial](https://github.com/mrphilbrown/Spaverlock.AI.TrustBOM/blob/main/documentation/guides/tutorial.md)
+to introduce a proposed Gemini dependency, model configuration, and
+MCP connection one tracked change at a time. The scanner produces
+draft, cited evidence, not proof of an operational deployment.
 
 ```powershell
 git clone https://github.com/mrphilbrown/abgindon-taxi-solutions.git
 cd abgindon-taxi-solutions
-npm test
-npm start
+trustbom init
+trustbom scan
 ```
 
-Open `http://localhost:3000/`, `/drivers/driver-101/contract`,
-`/drivers/driver-101/earnings`, `/managers/overview`, and
-`/owners/overview`. Stop the server with Ctrl+C before moving on.
+You need Git and the `trustbom` CLI; **no Node.js, Python runtime, API
+key, or server** is needed. The `workshop/` inputs are not in scope
+until the tutorial copies them to recognized paths. All scenario data
+and the customer's [sample RFI](rfi/request.csv) are synthetic; do not
+put real employee records or confidential customer questions in this
+public repository.
 
-Node.js 20+ is required; our starter has no external dependencies.
-All names and records are synthetic. This is a teaching fixture, **not** an
-HR product: URL IDs are not authentication; there is no authorization,
-audit trail, production data, or automated employment decision. Never
-deploy it or use real employee records.
-
-A customer's sample [RFI request](rfi/request.csv) is included. Our
-`npm run rfi` refuses an unapproved graph; once Trust has approved and
-stamped a graph, `trustbom export` followed by `npm run rfi` creates
-cited answers in `export/answers.csv`. Unknown answers and unmatched
-questions still need our Trust team; nothing is emailed to the buyer.
+After our graph is genuinely approved and stamped in a real vendor
+repository, `trustbom export` followed by
+`trustbom answer --questions rfi\request.csv` can produce cited RFI
+answers. On this unsigned exercise repository, `answer` **must refuse**
+instead of responding from a draft. Unknown and unmatched answers
+still require Trust review before anything goes to a customer.

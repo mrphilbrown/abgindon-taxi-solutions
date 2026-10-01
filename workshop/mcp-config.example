@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "synthetic-driver-earnings": {
-      "command": "node",
-      "args": ["src/mcp-server.mjs"]
+      "command": "driver-earnings-mcp"
     }
   }
 }
